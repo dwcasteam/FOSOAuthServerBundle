@@ -70,8 +70,11 @@ class OAuthProvider implements AuthenticationProviderInterface
             if ($accessToken = $this->serverService->verifyAccessToken($tokenString)) {
                 $scope = $accessToken->getScope();
                 $user = $accessToken->getUser();
+                $conference = $accessToken->getConferenceId();
 
                 if (null !== $user) {
+
+                    $this->userChecker->setConference($conference);
                     try {
                         $this->userChecker->checkPreAuth($user);
                     } catch (AccountStatusException $e) {

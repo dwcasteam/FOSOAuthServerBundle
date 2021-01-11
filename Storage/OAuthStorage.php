@@ -135,6 +135,7 @@ class OAuthStorage implements IOAuth2RefreshTokens, IOAuth2GrantUser, IOAuth2Gra
         $token->setScope($scope);
 
         if (null !== $data) {
+            $token->setConferenceId($data->getGenie());
             $token->setUser($data);
         }
 
